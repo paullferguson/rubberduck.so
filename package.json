@@ -1,0 +1,41 @@
+{
+  "name": "RubberDuck.so",
+  "version": "1.0.0",
+  "description": "Get your projects dependencies docs",
+  "author": "Paul Ferguson",
+  "license": "MIT",
+  "keywords": [ "Github", "NPM", "Docs" ],
+  "bugs": {
+    "url": "https://github.com/paullferguson/rubberduck.so/issues"
+  },
+  "homepage": "https://github.com/paullferguson/rubberduck.so#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paullferguson/rubberduck.so.git"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-plugin-unit-jest": "~4.4.0",
+    "@vue/cli-service": "~4.4.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/test-utils": "^1.0.3",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
