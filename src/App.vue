@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/auth">Auth</router-link>
-    </div>
+    </div> -->
     <router-view/>
   </div>
 </template>
@@ -15,6 +15,11 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin: 0 64px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #nav {

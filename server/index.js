@@ -33,9 +33,7 @@ app.get('/return',
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
     console.log(req.query.code);
-    // res.redirect(`/users/${req.user.username}`);
-    console.log(req.user.username, '- Got authenticated');
-    res.redirect('/projects');
+    res.redirect(`/profile/${req.query.code}`);
   });
 
 // app.get('/profile',
