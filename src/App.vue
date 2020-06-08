@@ -12,8 +12,8 @@ export default {
 
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <LandingPage msg="Welcome to an App"/>
+    <img alt="logo" src="./assets/logo.png">
+    <LandingPage msg="Get your projects dependencies documentation"/>
   </div>
 </template>
 
