@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="duck logo" src="../assets/logo.png">
-    <h4>Login with Github and get handys documentation for your project.</h4>
+    <h4>Login with Github and get handy documentation for your project.</h4>
     <a class="btn" href="/auth/github">Login With Github</a>
   </div>
 </template>
