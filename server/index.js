@@ -18,7 +18,7 @@ app.use(compression());
 
 
 // Static
-app.use('/', express.static(process.env.DEV ? 'public' : 'dist'));
+app.use('/', express.static('dist'));
 
 // Routes
 // app.get(`/review-api/products/:product_id/reviews`, getReviewsByProductId);
