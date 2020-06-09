@@ -2,8 +2,6 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      <router-link to="/auth">Auth</router-link>
-      <router-link to="/profile">Profile</router-link>
     </div>
     <main>
       <router-view/>
@@ -17,7 +15,6 @@
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
     margin: 0 64px;
     height: 100%;
@@ -39,6 +36,7 @@
 
   main {
     height: calc( 100% - 82px);
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
