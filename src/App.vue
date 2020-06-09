@@ -20,13 +20,20 @@
     height: 100%;
   }
 
+  a {
+    color: #3f721d;
+
+    &:hover {
+      color: #293033;
+    }
+  }
+
   #nav {
     padding: 30px;
 
     a {
       margin: 0 16px;
       font-weight: bold;
-      color: #2c3e50;
 
       &.router-link-exact-active {
         color: #20704c;

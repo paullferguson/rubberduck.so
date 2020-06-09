@@ -3,6 +3,7 @@ const express = require('express');
 const compression = require('compression');
 const passport = require('./controller/github-auth');
 const getRepos = require('./model/github-repo');
+const getPackageJson = require('./model/github-file');
 const { User, Repo } = require('../database/index');
 
 const app = express();
@@ -51,15 +52,39 @@ app.get('/api/user/:id',
     // res.send(req.user);
   });
 
-app.get('/api/repos/:id',
+app.get('/api/users/repos/:id',
   // require('connect-ensure-login').ensureLoggedIn(),
   (req, res) => {
-    Repo.find({ owner_id: req.params.id }).sort({ updated_at: 1 })
+    // owner_id: req.params.id
+    Repo.find({}).sort({ updated_at: -1 })
       .then((repos) => {
         res.send(repos);
       })
       .catch((err) => res.status(500).send(err));
   });
+
+app.get('/api/repo/:repoName',
+  // require('connect-ensure-login').ensureLoggedIn(),
+  (req, res) => {
+    Repo.findOne({ name: req.params.repoName })
+      .then((repo) => {
+        res.send(repo);
+      })
+      .catch((err) => res.status(500).send(err));
+  });
+
+
+app.get('/api/file/:repoName',
+  // require('connect-ensure-login').ensureLoggedIn(),
+  (req, res) => {
+    // owner_id: req.params.id
+    getPackageJson(req.user, req.params.repoName, (err, file) => {
+      if (err) throw err;
+      console.log('File saved', file);
+      res.send({ file });
+    });
+  });
+
 
 // LetLive.
 app.listen(app.set('port'), () => {

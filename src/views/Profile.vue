@@ -12,7 +12,9 @@
       <h1>Repos</h1>
       <ul>
         <li v-for="repo in repos" :key="repo.repo_id">
-          <h3>{{repo.name}}</h3>
+          <h3>
+            <router-link :to="`/repo/${repo.name}`">{{repo.name}}</router-link>
+          </h3>
           <p>
             {{repo.description}}
             <a :href="'://' + repo.html_url" target="_blank" rel="noopener noreferrer">View on Github</a>
@@ -58,7 +60,7 @@ export default {
         xhrUser.send();
 
         const xhrRepo = new XMLHttpRequest();
-        xhrRepo.open('GET', `/api/repos/${this.$route.params.userID}`);
+        xhrRepo.open('GET', `/api/users/repos/${this.$route.params.userID}`);
         xhrRepo.onload = () => {
           this.repos = JSON.parse(xhrRepo.responseText);
           console.log(this.repos);
@@ -74,7 +76,7 @@ export default {
 <style lang="scss" scoped>
 
   .profile {
-    max-width: 700px;
+    max-width: 500px;
     width: 100%;
   }
 

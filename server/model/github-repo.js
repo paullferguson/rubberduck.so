@@ -3,13 +3,8 @@
 const request = require('request');
 const { Repo } = require('../../database/index');
 
-
-// Maybe https://raw.githubusercontent.com/:owner/:repo/master/
-
-
 const getRepos = (user, cb) => {
   const options = {
-    // url: 'https://api.github.com/user/repos',
     url: user.repos_url,
     method: 'GET',
     headers: {
@@ -46,6 +41,7 @@ const getRepos = (user, cb) => {
               html_url: repo.html_url,
               description: repo.description,
               branches_url: repo.branches_url,
+              contents_url: repo.contents_url,
               blobs_url: repo.blobs_url,
               url: repo.url,
               updated_at: repo.updated_at,

@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Repo from '../views/Repo.vue';
 
 Vue.use(VueRouter);
 
@@ -17,9 +16,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
   },
   {
-    path: '/repo/',
+    path: '/repo/:repoName',
     name: 'Repo',
-    component: Repo,
+    component: () => import(/* webpackChunkName: "repo" */ '../views/Repo.vue'),
   },
 ];
 
