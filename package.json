@@ -3,29 +3,35 @@
   "version": "1.0.0",
   "description": "Get your projects dependencies docs",
   "author": "Paul Ferguson",
-  "license": "MIT",
-  "keywords": [ "Github", "NPM", "Docs" ],
-  "bugs": {
-    "url": "https://github.com/paullferguson/rubberduck.so/issues"
-  },
-  "homepage": "https://github.com/paullferguson/rubberduck.so#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paullferguson/rubberduck.so.git"
-  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "server": "node server/index.js",
+    "server-w": "nodemon server/index.js"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.5",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.9.18",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-github": "^1.1.0",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-plugin-router": "^4.4.1",
     "@vue/cli-plugin-unit-jest": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
@@ -37,5 +43,19 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
+  },
+  "bugs": {
+    "url": "https://github.com/paullferguson/rubberduck.so/issues"
+  },
+  "homepage": "https://github.com/paullferguson/rubberduck.so#readme",
+  "keywords": [
+    "Github",
+    "NPM",
+    "Docs"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paullferguson/rubberduck.so.git"
   }
 }
