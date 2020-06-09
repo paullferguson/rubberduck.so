@@ -3,9 +3,9 @@
     <header>
       <img :alt="user.name + 'avatar'" :src="user.avatar_url">
       <h4>
-        <a :href="'://' + user.html_url" target="_blank" rel="noopener noreferrer">
-          {{ user.login }}
-        </a>
+        <a :href="user.html_url" target="_blank" rel="noopener noreferrer">{{ user.login }}</a>
+        -
+        <a href="/logout">Logout</a>
       </h4>
     </header>
     <div class="repos">
@@ -17,10 +17,11 @@
           </h3>
           <p>
             {{repo.description}}
-            <a :href="'://' + repo.html_url" target="_blank" rel="noopener noreferrer">View on Github</a>
+            <a :href="repo.html_url" target="_blank" rel="noopener noreferrer">
+              View on Github
+            </a>
           </p>
         </li>
-
       </ul>
     </div>
   </div>
@@ -55,7 +56,7 @@ export default {
           const userArr = JSON.parse(xhrUser.responseText);
           // eslint-disable-next-line prefer-destructuring
           this.user = userArr[0];
-          console.log(this.user);
+          // console.log(this.user);
         };
         xhrUser.send();
 
@@ -63,7 +64,7 @@ export default {
         xhrRepo.open('GET', `/api/users/repos/${this.$route.params.userID}`);
         xhrRepo.onload = () => {
           this.repos = JSON.parse(xhrRepo.responseText);
-          console.log(this.repos);
+          // console.log(this.repos);
         };
         xhrRepo.send();
       }
