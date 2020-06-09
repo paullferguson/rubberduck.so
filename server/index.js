@@ -32,15 +32,16 @@ app.get('/auth/github',
 app.get('/return',
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
-    console.log(req.query.code);
-    res.redirect(`/profile/${req.query.code}`);
+    console.log(req.user);
+    res.redirect(`/?user=${req.user.id}`);
   });
 
-// app.get('/profile',
-//   require('connect-ensure-login').ensureLoggedIn(),
-//   (req, res) => {
-//     res.render('profile', { user: req.user });
-//   });
+app.get('/api/user/:id',
+  require('connect-ensure-login').ensureLoggedIn(),
+  (req, res) => {
+    console.log('API HIT:', req.user);
+    res.send(req.user);
+  });
 
 // LetLive.
 app.listen(app.set('port'), () => {

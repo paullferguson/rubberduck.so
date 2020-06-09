@@ -10,10 +10,26 @@
 
 export default {
   name: 'Home',
+
   components: {
     // LandingPage,
   },
+
+  created() {
+    this.checkUserData();
+  },
+
+  methods: {
+    checkUserData() {
+      // is there a user
+      if (this.$route.query.user) {
+        // Returning data hack from Express. If user redirect to /user
+        this.$router.push(`profile/${this.$route.query.user}`);
+      }
+    },
+  },
 };
+
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Profile from '../views/Profile.vue';
+import Repo from '../views/Repo.vue';
 
 Vue.use(VueRouter);
 
@@ -12,14 +12,14 @@ const routes = [
     component: Home,
   },
   {
-    path: '/auth',
-    name: 'Auth',
-    component: () => import(/* webpackChunkName: "auth" */ '../views/Auth.vue'),
+    path: '/profile/:userID',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue'),
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile,
+    path: '/repo/',
+    name: 'Repo',
+    component: Repo,
   },
 ];
 

@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-underscore-dangle */
 
 const passport = require('passport');
@@ -11,18 +12,21 @@ passport.use(new GitHubStrategy({
   scope: 'read:user,repo',
 },
 ((accessToken, refreshToken, profile, done) => {
-  console.log(profile.username);
-  // eslint-disable-next-line no-undef
-  // return cb(err, user);
+  // console.log(profile.username);
 
   User.findOne({
     id: profile.id,
   }, (err, user) => {
     if (err) return done(err);
+
+    // console.log(user);
+    // console.log(accessToken);
+
     if (!user) {
+      // console.log('write user', profile.id);
       const newUser = new User({
-        accessToken,
         id: profile.id,
+        accessToken,
         username: profile.username,
         provider: profile.provider,
         providerUserId: profile._json.providerUserId,
