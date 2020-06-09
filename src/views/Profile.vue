@@ -1,13 +1,25 @@
 <template>
-  <div class="profile">
-    <div v-if="user">
+  <div v-if="user" class="profile">
+    <header>
       <img :alt="user.name + 'avatar'" :src="user.avatar_url">
-      <h4>Username
-        <a :href="'//' + user.html_url" target="_blank" rel="noopener noreferrer">
+      <h4>
+        <a :href="'://' + user.html_url" target="_blank" rel="noopener noreferrer">
           {{ user.login }}
         </a>
       </h4>
-      <p>Repos</p>
+    </header>
+    <div class="repos">
+      <h1>Repos</h1>
+      <ul>
+        <li v-for="repo in repos" :key="repo.repo_id">
+          <h3>{{repo.name}}</h3>
+          <p>
+            {{repo.description}}
+            <a :href="'://' + repo.html_url" target="_blank" rel="noopener noreferrer">View on Github</a>
+          </p>
+        </li>
+
+      </ul>
     </div>
   </div>
 </template>
@@ -23,6 +35,7 @@ export default {
   data() {
     return {
       user: null,
+      repos: null,
     };
   },
 
@@ -34,13 +47,23 @@ export default {
     fetchData() {
       // is there a user
       if (this.$route.params.userID) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `/api/user/${this.$route.params.userID}`);
-        xhr.onload = () => {
-          this.user = JSON.parse(xhr.responseText);
+        const xhrUser = new XMLHttpRequest();
+        xhrUser.open('GET', `/api/user/${this.$route.params.userID}`);
+        xhrUser.onload = () => {
+          const userArr = JSON.parse(xhrUser.responseText);
+          // eslint-disable-next-line prefer-destructuring
+          this.user = userArr[0];
           console.log(this.user);
         };
-        xhr.send();
+        xhrUser.send();
+
+        const xhrRepo = new XMLHttpRequest();
+        xhrRepo.open('GET', `/api/repos/${this.$route.params.userID}`);
+        xhrRepo.onload = () => {
+          this.repos = JSON.parse(xhrRepo.responseText);
+          console.log(this.repos);
+        };
+        xhrRepo.send();
       }
     },
   },
@@ -50,10 +73,37 @@ export default {
 
 <style lang="scss" scoped>
 
+  .profile {
+    max-width: 700px;
+    width: 100%;
+  }
+
   img {
     max-width: 100%;
     height: 115px;
     border-radius: 4px;
+  }
+
+  .repos {
+    text-align: start;
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 40px;
+    }
+
+    li {
+      margin-bottom: 24px;
+
+      h3 {
+        margin: 0 0 4px;
+      }
+
+      p {
+        margin-top: 0;
+      }
+    }
   }
 
 </style>

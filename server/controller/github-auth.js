@@ -20,8 +20,7 @@ passport.use(new GitHubStrategy({
     if (err) return done(err);
 
     // console.log(user);
-    console.log('ACCESSTOKEN---', accessToken);
-    console.log('refreshToken---', refreshToken);
+    // console.log('ACCESS TOKEN---', accessToken);
 
     if (!user) {
       // console.log('write user', profile.id);

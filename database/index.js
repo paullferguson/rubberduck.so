@@ -30,12 +30,16 @@ const UserSchema = new Schema({
 const User = mongoose.model('User', UserSchema);
 
 const RepoSchema = new Schema({
+  owner_id: { type: String, required: true },
   repo_id: Number,
   name: String,
   full_name: String,
   html_url: String,
   description: String,
+  branches_url: String,
+  blobs_url: String,
   url: String,
+  updated_at: String,
 });
 
 const Repo = mongoose.model('Repo', RepoSchema);
