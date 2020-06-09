@@ -12,6 +12,7 @@
     "server-w": "nodemon server/index.js"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "connect-ensure-login": "^0.1.1",

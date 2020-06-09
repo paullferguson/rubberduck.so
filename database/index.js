@@ -14,22 +14,34 @@ db.once('open', () => { console.log('Connected to Mongo'); });
 
 const UserSchema = new Schema({
   id: { type: String, required: true },
-  accessToken: { type: String },
-  provider: { type: String },
-  providerUserId: { type: String },
+  accessToken: String,
+  provider: String,
+  providerUserId: String,
   login: { type: String, required: true },
-  node_id: { type: String },
-  avatar_url: { type: String },
-  url: { type: String },
-  html_url: { type: String },
-  organizations_url: { type: String },
-  repos_url: { type: String },
-  name: { type: String },
+  node_id: String,
+  avatar_url: String,
+  url: String,
+  html_url: String,
+  organizations_url: String,
+  repos_url: String,
+  name: String,
 });
 
 const User = mongoose.model('User', UserSchema);
 
+const RepoSchema = new Schema({
+  repo_id: Number,
+  name: String,
+  full_name: String,
+  html_url: String,
+  description: String,
+  url: String,
+});
+
+const Repo = mongoose.model('Repo', RepoSchema);
+
 module.exports = {
   User,
+  Repo,
   db,
 };

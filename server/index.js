@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const compression = require('compression');
 const passport = require('./controller/github-auth');
+// const getRepos = require('./model/github-repo');
 
 
 const app = express();
@@ -32,14 +33,13 @@ app.get('/auth/github',
 app.get('/return',
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
-    console.log(req.user);
+    // getRepos(req.query.code, req.user);
     res.redirect(`/?user=${req.user.id}`);
   });
 
 app.get('/api/user/:id',
   require('connect-ensure-login').ensureLoggedIn(),
   (req, res) => {
-    console.log('API HIT:', req.user);
     res.send(req.user);
   });
 
