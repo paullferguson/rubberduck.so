@@ -86,6 +86,12 @@ app.get('/api/file/:repoName',
   });
 
 
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+
 // LetLive.
 app.listen(app.set('port'), () => {
   console.log(`Rubber Duck Server running: ${app.set('port')}`);
