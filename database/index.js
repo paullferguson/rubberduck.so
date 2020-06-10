@@ -26,22 +26,34 @@ const UserSchema = new Schema({
   repos_url: String,
   name: String,
 });
-
 const User = mongoose.model('User', UserSchema);
 
 const RepoSchema = new Schema({
+  owner_id: { type: String, required: true },
   repo_id: Number,
   name: String,
   full_name: String,
+  contents_url: String,
   html_url: String,
   description: String,
+  branches_url: String,
+  blobs_url: String,
   url: String,
+  updated_at: String,
 });
-
 const Repo = mongoose.model('Repo', RepoSchema);
+
+const FileSchema = new Schema({
+  repoName: String,
+  userName: String,
+  file: String,
+});
+const File = mongoose.model('File', FileSchema);
+
 
 module.exports = {
   User,
   Repo,
+  File,
   db,
 };

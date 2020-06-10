@@ -1,33 +1,30 @@
 /* eslint-disable no-plusplus */
 
-const axios = require('axios');
+const request = require('request');
 const { Repo } = require('../../database/index');
 
-
-// Maybe https://raw.githubusercontent.com/:owner/:repo/master/
-
-
-const getRepos = (token, user, cb) => {
+const getRepos = (user, cb) => {
   const options = {
-    url: `https://api.github.com/user/${user.login}/repos`,
+    url: user.repos_url,
     method: 'GET',
     headers: {
       'User-Agent': 'request',
       Accept: 'application/vnd.github.v3+json',
-      Authorization: `token ${token}`,
+      Authorization: `token ${user.accessToken}`,
     },
   };
 
-  axios(options, (err, resp, body) => {
+  request(options, (err, resp, body) => {
     if (err) {
       console.log('Git request error', err);
       cb(err);
     } else {
-      const pBody = JSON.parse(body);
+      // eslint-disable-next-line no-param-reassign
+      body = JSON.parse(body);
       let counter = 0;
-      console.log('REPO RESPONSE:', pBody);
+      // console.log('REPO RESPONSE:', body);
 
-      pBody.items.forEach((repo) => {
+      body.forEach((repo) => {
         console.log('Saving to Mongo < ', repo.full_name);
 
         Repo.findOne({ repo_id: repo.id }, (findErr, checkRepo) => {
@@ -38,14 +35,19 @@ const getRepos = (token, user, cb) => {
           } else {
             Repo.create({
               repo_id: repo.id,
+              owner_id: repo.owner.id,
               name: repo.name,
               full_name: repo.full_name,
               html_url: repo.html_url,
               description: repo.description,
+              branches_url: repo.branches_url,
+              contents_url: repo.contents_url,
+              blobs_url: repo.blobs_url,
               url: repo.url,
+              updated_at: repo.updated_at,
             }, () => {
               counter++;
-              if (counter === pBody.items.length) {
+              if (counter === body.length) {
                 cb();
               }
             });

@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const compression = require('compression');
 const passport = require('./controller/github-auth');
-// const getRepos = require('./model/github-repo');
-
+const getRepos = require('./model/github-repo');
+const getPackageJson = require('./model/github-file');
+const { User, Repo } = require('../database/index');
 
 const app = express();
 app.set('port', 3030);
@@ -33,15 +34,63 @@ app.get('/auth/github',
 app.get('/return',
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
-    // getRepos(req.query.code, req.user);
+    getRepos(req.user, (err) => {
+      if (err) throw err;
+      console.log('Repos saves');
+    });
     res.redirect(`/?user=${req.user.id}`);
   });
 
 app.get('/api/user/:id',
   require('connect-ensure-login').ensureLoggedIn(),
   (req, res) => {
-    res.send(req.user);
+    User.find({ id: req.user.id })
+      .then((repos) => {
+        res.send(repos);
+      })
+      .catch((err) => res.status(500).send(err));
+    // res.send(req.user);
   });
+
+app.get('/api/users/repos/:id',
+  // require('connect-ensure-login').ensureLoggedIn(),
+  (req, res) => {
+    // owner_id: req.params.id
+    Repo.find({}).sort({ updated_at: -1 })
+      .then((repos) => {
+        res.send(repos);
+      })
+      .catch((err) => res.status(500).send(err));
+  });
+
+app.get('/api/repo/:repoName',
+  // require('connect-ensure-login').ensureLoggedIn(),
+  (req, res) => {
+    Repo.findOne({ name: req.params.repoName })
+      .then((repo) => {
+        res.send(repo);
+      })
+      .catch((err) => res.status(500).send(err));
+  });
+
+
+app.get('/api/file/:repoName',
+  // require('connect-ensure-login').ensureLoggedIn(),
+  (req, res) => {
+    // owner_id: req.params.id
+    getPackageJson(req.user, req.params.repoName, (err, file) => {
+      if (err) throw err;
+      console.log('File saved', file);
+      res.send({ file });
+    });
+  });
+
+
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 
 // LetLive.
 app.listen(app.set('port'), () => {
