@@ -35,13 +35,13 @@ npm run server-w
 ```
 
 
-![Repo list page](https://i.imgur.com/ctRBIFZ.png)
+![Repo list page](https://i.imgur.com/ctRBIFZ.png?1)
 
 ![Repo view, scripts](https://i.imgur.com/J12yqTa.png)
 
-![Repo view, doc links](https://i.imgur.com/bw6jaJ6.png)
+![Repo view, doc links](https://i.imgur.com/uGfT7l1.png?1)
 
-![Repo view, package.json](https://i.imgur.com/xCK9E59.png)
+![Repo view, package.json](https://i.imgur.com/xCK9E59.png?1)
 
 
 
