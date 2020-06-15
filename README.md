@@ -1,6 +1,6 @@
 # Rubber Duck
 
-![Rubber Duck](https://i.imgur.com/6SpMSNh.png?2)
+![Rubber Duck](https://i.imgur.com/6SpMSNh.png?3)
 
 -1. Log in with Github to get your projects dependencies documentation.
 -1. (coming soon) Chat over you idea and get some suggested Stack Overflow answers.
